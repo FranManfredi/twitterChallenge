@@ -30,7 +30,7 @@ const SignUpPage = () => {
       setData({ ...data, [prop]: event.target.value });
     };
   const handleSubmit = async () => {
-    const { confirmPassword, ...requestData } = data;
+    const { confirmPassword, name, ...requestData } = data;
     httpRequestService
       .signUp(requestData)
       .then(() => navigate("/"))

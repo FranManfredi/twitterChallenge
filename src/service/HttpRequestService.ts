@@ -3,9 +3,10 @@ import axios from "axios";
 import { S3Service } from "./S3Service";
 
 const url =
-  process.env.REACT_APP_API_URL || "https://twitter-ieea.onrender.com/api";
+  process.env.REACT_APP_API_URL || "http://localhost:8080/api";
 
 const httpRequestService = {
+
   signUp: async (data: Partial<SingUpData>) => {
     const res = await axios.post(`${url}/auth/signup`, data);
     if (res.status === 201) {
@@ -13,13 +14,17 @@ const httpRequestService = {
       return true;
     }
   },
+
   signIn: async (data: SingInData) => {
     const res = await axios.post(`${url}/auth/login`, data);
     if (res.status === 200) {
       localStorage.setItem("token", `Bearer ${res.data.token}`);
       return true;
+    } else {
+      return false;
     }
   },
+
   createPost: async (data: PostData) => {
     const res = await axios.post(`${url}/post`, data, {
       headers: {
@@ -35,6 +40,7 @@ const httpRequestService = {
       return res.data;
     }
   },
+  
   getPaginatedPosts: async (limit: number, after: string, query: string) => {
     const res = await axios.get(`${url}/post/${query}`, {
       headers: {
