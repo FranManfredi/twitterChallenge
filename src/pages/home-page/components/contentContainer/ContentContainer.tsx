@@ -16,7 +16,7 @@ const ContentContainer = () => {
           padding={"16px"}
           borderBottom={"1px solid #ebeef0"}
         >
-          <TweetBox />
+          <TweetBox parentId={""} mobile={false} />
         </StyledContainer>
         <StyledContainer minHeight={"66vh"} width={"100%"}>
           <ContentFeed />
