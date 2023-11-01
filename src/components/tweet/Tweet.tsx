@@ -18,7 +18,7 @@ interface TweetProps {
   post: Post;
 }
 const Tweet = ({ post }: TweetProps) => {
-  const [actualPost, setActualPost] = useState<Post>(post);
+  const [actualPost, setActualPost] = useState<Post>(post );
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
@@ -26,7 +26,7 @@ const Tweet = ({ post }: TweetProps) => {
   const navigate = useNavigate();
 
   const getCountByType = (type: string): number => {
-    return actualPost.reactions.filter((r) => r.type === type).length ?? 0;
+    return actualPost?.reactions?.filter((r) => r.type === type)?.length ?? 0;
   };
 
   const handleReaction = async (type: string) => {
@@ -58,8 +58,7 @@ const Tweet = ({ post }: TweetProps) => {
         maxHeight={"48px"}
       >
         <AuthorData
-          id={post.author.id}
-          name={post.author.name ?? "Name"}
+          id={post.authorId}
           username={post.author.username}
           createdAt={post.createdAt}
           profilePicture={post.author.profilePicture}
@@ -92,7 +91,7 @@ const Tweet = ({ post }: TweetProps) => {
       <StyledReactionsContainer>
         <Reaction
           img={IconType.CHAT}
-          count={actualPost.comments.length}
+          count={actualPost.comments?.length ?? 0}
           reactionFunction={() =>
             window.innerWidth > 600
               ? setShowCommentModal(true)

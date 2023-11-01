@@ -48,8 +48,8 @@ const TweetBox: React.FC<TweetBoxProps> = (props) => {
       setImages([]);
       setImagesPreview([]);
       dispatch(setLength(length + 1));
-      const posts = await httpService.getPosts(query);
-      dispatch(updateFeed(posts));
+      await httpService.createPost({content});
+      dispatch(updateFeed( await httpService.getPosts(query)));
       close && close();
     } catch (e) {
       console.log(e);

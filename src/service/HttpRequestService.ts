@@ -1,6 +1,7 @@
 import type { PostData, SingInData, SingUpData } from "./index";
 import axios from "axios";
 import { S3Service } from "./S3Service";
+import { axiosHandler } from "./axiosHandler";
 
 const url =
   process.env.REACT_APP_API_URL || "http://localhost:8080/api";
@@ -26,92 +27,75 @@ const httpRequestService = {
   },
 
   createPost: async (data: PostData) => {
-    const res = await axios.post(`${url}/post`, data, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    console.log(data);
+    const res = await axiosHandler.post(`${url}/post`, data).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 201) {
-      const { upload } = S3Service;
-      for (const imageUrl of res.data.images) {
-        const index: number = res.data.images.indexOf(imageUrl);
-        await upload(data.images![index], imageUrl);
-      }
-      return res.data;
+    const { upload } = S3Service;
+    for (const imageUrl of res.data.images) {
+      const index: number = res.data.images.indexOf(imageUrl);
+      await upload(data.images![index], imageUrl);
     }
+    return res.data;
   },
-  
+
   getPaginatedPosts: async (limit: number, after: string, query: string) => {
-    const res = await axios.get(`${url}/post/${query}`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    const res = await axiosHandler.get(`${url}/post/${query}`, {
       params: {
         limit,
         after,
       },
+    }).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 200) {
-      return res.data;
-    }
+    return res.data;
   },
+
   getPosts: async (query: string) => {
-    const res = await axios.get(`${url}/post/${query}`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    const res = await axiosHandler.get(`${url}/post/`).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 200) {
-      return res.data;
-    }
+    return res.data;
   },
+
   getRecommendedUsers: async (limit: number, skip: number) => {
-    const res = await axios.get(`${url}/user`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    const res = await axiosHandler.get(`${url}/user`, {
       params: {
         limit,
         skip,
       },
+    }).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 200) {
-      return res.data;
-    }
+    return res.data;
   },
+
   me: async () => {
-    const res = await axios.get(`${url}/user/me`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    const res = await axiosHandler.get(`${url}/user/me`).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 200) {
-      return res.data;
-    }
+    return res.data;
   },
+
   getPostById: async (id: string) => {
-    const res = await axios.get(`${url}/post/${id}`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
+    const res = await axiosHandler.get(`${url}/post/${id}`).catch((err) => {
+      console.log(err);
+      return err;
     });
-    if (res.status === 200) {
-      return res.data;
-    }
+    return res.data;
   },
+
   createReaction: async (postId: string, reaction: string) => {
-    const res = await axios.post(
-      `${url}/reaction/${postId}`,
-      { type: reaction },
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
-    if (res.status === 201) {
-      return res.data;
-    }
+    const res = await axiosHandler.post( `${url}/reaction/${postId}`, { type: reaction }).catch((err) => {
+      console.log(err);
+      return err;
+    });
+     return res.data;
   },
   deleteReaction: async (reactionId: string) => {
     const res = await axios.delete(`${url}/reaction/${reactionId}`, {
@@ -172,7 +156,7 @@ const httpRequestService = {
   },
 
   getProfile: async (id: string) => {
-    const res = await axios.get(`${url}/user/profile/${id}`, {
+    const res = await axios.get(`${url}/user/${id}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },

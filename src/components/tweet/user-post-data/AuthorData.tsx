@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 interface UserPostDataProps {
   createdAt: Date;
   id: string;
-  name: string;
   username: string;
   profilePicture?: string;
 }
@@ -16,7 +15,6 @@ const AuthorData = ({
   createdAt,
   id,
   username,
-  name,
   profilePicture,
 }: UserPostDataProps) => {
   const navigate = useNavigate();
@@ -29,10 +27,9 @@ const AuthorData = ({
     <StyledAuthorDataContainer>
       <Avatar
         src={profilePicture === null ? Icon : profilePicture!}
-        alt={name}
+        alt={"name"}
         onClick={redirectToProfile}
       />
-      <p>{name}</p>
       <p className={"username"}>{"@" + username}</p>
       <StyledDot />
       <p className={"username"}>
