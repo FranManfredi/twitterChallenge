@@ -14,6 +14,7 @@ const httpRequestService = {
       localStorage.setItem("token", `Bearer ${res.data.token}`);
       return true;
     }
+    return res.data;
   },
 
   signIn: async (data: SingInData) => {

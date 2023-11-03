@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,14 +9,19 @@ import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
 import { ButtonType } from "../../../components/button/StyledButton";
 import { StyledH3 } from "../../../components/common/text";
+import { ErrorText } from "../../../components/error-text/ErrorText";
 
 interface SignUpData {
-  name: string;
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
+export interface ErrorItem {
+    property: string;
+    constraints: Record<string, string>;
+}
+
 const SignUpPage = () => {
   const [data, setData] = useState<Partial<SignUpData>>({});
   const [error, setError] = useState(false);
@@ -25,16 +30,24 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const handleChange =
-    (prop: string) => (event: ChangeEvent<HTMLInputElement>) => {
-      setData({ ...data, [prop]: event.target.value });
-    };
+  
+
+  const [errors, setErrors] = useState<ErrorItem[]>([]);
+
+  const handleChange = (prop: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, [prop]: event.target.value });
+  };
+
   const handleSubmit = async () => {
-    const { confirmPassword, name, ...requestData } = data;
+    const { confirmPassword, ...requestData } = data;
     httpRequestService
       .signUp(requestData)
       .then(() => navigate("/"))
-      .catch(() => setError(false));
+      .catch((err) => {
+        setError(true);
+        console.log(err.response.data.errors);
+        setErrors(err.response.data.errors);
+      });
   };
 
   return (
@@ -48,18 +61,12 @@ const SignUpPage = () => {
           <div className={"input-container"}>
             <LabeledInput
               required
-              placeholder={"Enter name..."}
-              title={t("input-params.name")}
-              error={error}
-              onChange={handleChange("name")}
-            />
-            <LabeledInput
-              required
               placeholder={"Enter username..."}
               title={t("input-params.username")}
               error={error}
               onChange={handleChange("username")}
             />
+            <ErrorText propName={"username"} error errors={errors}/>
             <LabeledInput
               required
               placeholder={"Enter email..."}
@@ -67,6 +74,7 @@ const SignUpPage = () => {
               error={error}
               onChange={handleChange("email")}
             />
+            <ErrorText propName={"email"} error errors={errors}/>
             <LabeledInput
               type="password"
               required
@@ -75,6 +83,7 @@ const SignUpPage = () => {
               error={error}
               onChange={handleChange("password")}
             />
+            <ErrorText propName={"password"} error errors={errors}/>
             <LabeledInput
               type="password"
               required
@@ -83,6 +92,7 @@ const SignUpPage = () => {
               error={error}
               onChange={handleChange("confirmPassword")}
             />
+
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Button
