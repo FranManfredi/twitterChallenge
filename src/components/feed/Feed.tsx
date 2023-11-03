@@ -13,8 +13,6 @@ const Feed = ({ posts, loading }: FeedProps) => {
 
   const postArray = Array.isArray(posts) ? posts : [posts];
 
-  console.log("postArray", postArray);
-
   const deduplicatedPosts = postArray.filter((post, index, self) => {
     return self.findIndex((p) => p.id === post.id) === index;
   });

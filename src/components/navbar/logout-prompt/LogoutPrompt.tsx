@@ -10,6 +10,7 @@ import { useAppSelector } from "../../../redux/hooks";
 import { StyledPromptContainer } from "./PromptContainer";
 import { StyledContainer } from "../../common/Container";
 import { StyledP } from "../../common/text";
+import { StyledTransparentBackground } from "../../common/TrasparentBackground";
 
 interface LogoutPromptProps {
   show: boolean;
@@ -45,6 +46,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
   return (
     <>
       {showPrompt && (
+        <StyledTransparentBackground onClick={() => setShowPrompt(false)}>
         <StyledPromptContainer>
           <StyledContainer
             flexDirection={"row"}
@@ -65,6 +67,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
             }`}</StyledP>
           </StyledContainer>
         </StyledPromptContainer>
+        </StyledTransparentBackground>
       )}
       <Modal
         show={showModal}

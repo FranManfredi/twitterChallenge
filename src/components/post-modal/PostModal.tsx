@@ -10,13 +10,18 @@ interface PostModalProps {
 }
 
 export const PostModal = ({ onClose, show, children }: PostModalProps) => {
+  const handleContentClick = (event: React.MouseEvent) => {
+    // Prevent the click event from propagating to the background and closing the modal
+    event.stopPropagation();
+  };
+
   return (
     <>
       {show && (
-        <StyledBlurredBackground>
+        <StyledBlurredBackground onClick={onClose}> 
           <StyledTweetModalContainer>
             <ModalCloseButton onClick={onClose} />
-            {children}
+            <div onClick={handleContentClick} style={{width:"100%"}}>{children}</div>
           </StyledTweetModalContainer>
         </StyledBlurredBackground>
       )}
