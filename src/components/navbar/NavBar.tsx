@@ -17,6 +17,7 @@ import { StyledContainer } from "../common/Container";
 import { StyledIconContainer } from "./IconContainer";
 import { StyledNavItemsContainer } from "./navItem/NavItemsContainer";
 import { StyledP } from "../common/text";
+import OutsideAlerter from "../../hooks/OustideAlerter";
 
 const NavBar = () => {
   const location = useLocation();
@@ -96,7 +97,9 @@ const NavBar = () => {
         gap={"8px"}
         alignItems={"center"}
       >
-        <LogoutPrompt show={logoutOpen} />
+        <OutsideAlerter onClickOutside={() => setLogoutOpen(false)}>
+          <LogoutPrompt show={logoutOpen} />
+        </OutsideAlerter>
         <Avatar
           src={user.profilePicture ?? Icon}
           onClick={handleAvatarClick}
