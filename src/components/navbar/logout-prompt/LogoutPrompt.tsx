@@ -80,6 +80,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
           />
         }
         onClose={() => setShowModal(false)}
+        onOutsideClick={() => setShowModal(false)}
       />
     </>
   );

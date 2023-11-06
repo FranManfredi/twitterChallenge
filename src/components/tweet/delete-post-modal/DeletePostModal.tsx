@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { DeleteIcon } from "../../icon/Icon";
 import Modal from "../../modal/Modal";
 import Button from "../../button/Button";
@@ -9,11 +9,13 @@ import { ButtonType } from "../../button/StyledButton";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { Post } from "../../../service";
 import { StyledDeletePostModalContainer } from "./DeletePostModalContainer";
+import { StyledTransparentBackground } from "../../common/TrasparentBackground";
+import OutsideAlerter from "../../../hooks/OustideAlerter";
 
 interface DeletePostModalProps {
   show: boolean;
-  onClose: () => void;
   id: string;
+  onClose: () => void;
 }
 
 export const DeletePostModal = ({
@@ -47,24 +49,35 @@ export const DeletePostModal = ({
     <>
       {show && (
         <>
-          <StyledDeletePostModalContainer onClick={() => setShowModal(true)}>
-            <DeleteIcon />
-            <p>{t("buttons.delete")}</p>
-          </StyledDeletePostModalContainer>
-          <Modal
-            title={t("modal-title.delete-post") + "?"}
-            text={t("modal-content.delete-post")}
-            show={showModal}
-            onClose={handleClose}
-            acceptButton={
-              <Button
-                text={t("buttons.delete")}
-                buttonType={ButtonType.DELETE}
-                size={"MEDIUM"}
-                onClick={handleDelete}
-              />
+          <OutsideAlerter onClickOutside={() => {
+            if (!showModal) {
+              handleClose();
             }
-          />
+          }}>
+            <StyledDeletePostModalContainer onClick={() => setShowModal(true)}>
+              <DeleteIcon />
+              <p>{t("buttons.delete")}</p>
+            </StyledDeletePostModalContainer>
+          </OutsideAlerter>
+          {showModal && (
+            <StyledTransparentBackground onClick={handleClose}>
+              <Modal
+                title={t("modal-title.delete-post") + "?"}
+                text={t("modal-content.delete-post")}
+                show={showModal}
+                onClose={handleClose}
+                acceptButton={
+                  <Button
+                    text={t("buttons.delete")}
+                    buttonType={ButtonType.DELETE}
+                    size={"MEDIUM"}
+                    onClick={handleDelete}
+                  />
+                }
+                onOutsideClick={handleClose}
+              />
+            </StyledTransparentBackground>
+          )}
         </>
       )}
     </>

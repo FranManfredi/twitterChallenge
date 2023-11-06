@@ -166,6 +166,9 @@ const ProfilePage = () => {
               onClose={() => {
                 setShowModal(false);
               }}
+              onOutsideClick={() => {
+                setShowModal(false);
+              }}
             />
           </>
         )}
