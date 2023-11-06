@@ -74,6 +74,7 @@ export const DeletePostModal = ({
                     onClick={handleDelete}
                   />
                 }
+                onOutsideClick={handleClose}
               />
             </StyledTransparentBackground>
           )}
