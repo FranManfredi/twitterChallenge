@@ -24,7 +24,7 @@ export const ErrorText = ({ propName, error, errors }: { propName: string; error
       );
     }
   } catch (e) {
-    if ((errors as any).error_code == "USER_ALREADY_EXISTS" && propName == "email") {
+    if ((errors as any).error_code === "Mail already exists" && propName === "email") {
       return (
         <p className="error-message">
           {t("Acount with this email already exists")}
