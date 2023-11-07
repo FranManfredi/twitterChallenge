@@ -1,6 +1,7 @@
+import { Field } from "formik";
 import styled from "styled-components";
 
-export const StyledInputElement = styled.input`
+export const StyledInputElement = styled(Field)`
   font-size: 16px;
   border: none;
   outline: none;
