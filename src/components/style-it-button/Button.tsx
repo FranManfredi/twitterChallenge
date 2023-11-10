@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import { StyledButton, StyledButtonProps } from "../style-it-button/StyledButton";
 
 
