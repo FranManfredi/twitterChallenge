@@ -33,7 +33,6 @@ const Feed = ({ posts, loading }: FeedProps) => {
       if ((res?.length ?? 1) < 0) {
         setHasMore(false);
       } else {
-        console.log("res", res);
         setAfter(res[res.length - 1].id);
         setPostsToShow((prevPosts) => [...prevPosts, ...res]);
       }
