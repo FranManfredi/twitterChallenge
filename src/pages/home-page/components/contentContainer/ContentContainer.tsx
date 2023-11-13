@@ -10,7 +10,7 @@ const ContentContainer = () => {
   return (
     <StyledContentContainer>
       <Header />
-      <StyledFeedContainer>
+      <StyledFeedContainer id="content-container">
         <StyledContainer
           width={"100%"}
           padding={"16px"}

@@ -3,7 +3,7 @@ import { useHttpRequestService } from "../service/HttpRequestService";
 import { setLength, updateFeed } from "../redux/user";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-export const useGetFeed = () => {
+export const useGetFeed = (limit: number, after:string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const posts = useAppSelector((state) => state.user.feed);
@@ -17,7 +17,7 @@ export const useGetFeed = () => {
     try {
       setLoading(true);
       setError(false);
-      service.getPosts(query).then((res) => {
+      service.getPaginatedPosts(limit, after).then((res) => {
         const updatedPosts = Array.from(new Set([...posts, ...res]));
         dispatch(updateFeed(updatedPosts));
         dispatch(setLength(updatedPosts.length));
