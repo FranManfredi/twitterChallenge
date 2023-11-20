@@ -92,9 +92,7 @@ const ProfilePage = () => {
       .then((res) => {
         setProfile(res);
         setFollowing(
-          res
-            ? res?.followers.some((follower: User) => follower.id === user.id)
-            : false
+          res.isFollowingMe
         );
       })
       .catch(() => {
@@ -109,6 +107,8 @@ const ProfilePage = () => {
           });
       });
   };
+
+  console.log(profile);
 
   return (
     <>
@@ -145,7 +145,7 @@ const ProfilePage = () => {
               </StyledContainer>
             </StyledContainer>
             <StyledContainer width={"100%"}>
-              {profile.followers ? (
+              { profile ? (
                 <ProfileFeed />
               ) : (
                 <StyledH5>Private account</StyledH5>

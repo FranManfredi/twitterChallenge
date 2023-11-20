@@ -51,7 +51,7 @@ class PostPage extends Component {
         >
           <StyledH5>Tweet</StyledH5>
         </StyledContainer>
-        <StyledFeedContainer>
+        <StyledFeedContainer id='content-target'>
           {this.state.post ? (
             <>
               <Tweet post={this.state.post} />
@@ -62,7 +62,7 @@ class PostPage extends Component {
                 <TweetBox parentId={this.state.postId} />
               </StyledContainer>
 
-              <StyledContainer minHeight={"53.5vh"}>
+              <StyledContainer minHeight={"53.5vh"} >
                 <CommentFeed postId={this.state.postId} />
               </StyledContainer>
             </>

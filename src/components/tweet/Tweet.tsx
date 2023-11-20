@@ -43,9 +43,9 @@ const Tweet = ({ post }: TweetProps) => {
   };
 
   const hasReactedByType = (type: string): boolean => {
-    return actualPost.reactions.some(
+    return actualPost.reactions?.some(
       (r) => r.type === type && r.userId === user.id
-    );
+    ) ?? false;
   };
 
   return (
@@ -59,9 +59,9 @@ const Tweet = ({ post }: TweetProps) => {
       >
         <AuthorData
           id={post.authorId}
-          username={post.author.username}
+          username={post.author?.username ?? " "}
           createdAt={post.createdAt}
-          profilePicture={post.author.profilePicture}
+          profilePicture={user.profilePicture}
         />
         {post.authorId === user.id && (
           <>

@@ -19,9 +19,9 @@ const CommentModal = ({ post, show, onClose }: CommentModalProps) => {
       <StyledContainer gap={"16px"}>
         <AuthorData
           id={post.authorId}
-          username={post.author.username}
+          username={post.author?.username ?? " "}
           createdAt={post.createdAt}
-          profilePicture={post.author.profilePicture}
+          profilePicture={post.author?.profilePicture ?? " "}
         />
         <StyledContainer flexDirection={"row"}>
           <StyledLine />

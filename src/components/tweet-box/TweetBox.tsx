@@ -48,6 +48,11 @@ const TweetBox: React.FC<TweetBoxProps> = (props) => {
       setImages([]);
       setImagesPreview([]);
       dispatch(setLength(length + 1));
+      if (parentId) {
+        await httpService.createComment(parentId, content, images);
+        close && close();
+        return;
+      }
       await httpService.createPost({content});
       dispatch(updateFeed( await httpService.getPosts(query)));
       close && close();

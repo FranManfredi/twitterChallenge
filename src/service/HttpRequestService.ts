@@ -91,6 +91,14 @@ const httpRequestService = {
     return res.data;
   },
 
+  createComment: async (postId: string, content: string, images:File[]) => {
+    const res = await axiosHandler.put(`${url}/post/${postId}`, { data:{content, images }}).catch((err) => {
+      console.log(err);
+      return err;
+    });
+    return res.data;
+  },
+
   createReaction: async (postId: string, reaction: string) => {
     const res = await axiosHandler.post(`${url}/reaction/${postId}`, { type: reaction }).catch((err) => {
       console.log(err);
@@ -245,7 +253,7 @@ const httpRequestService = {
     limit: number,
     after: string
   ) => {
-    const res = await axiosHandler.get(`${url}/post/comment/by_post/${id}`, {
+    const res = await axiosHandler.get(`${url}/post/comments/${id}`, {
       params: {
         limit,
         after,
@@ -258,7 +266,7 @@ const httpRequestService = {
   },
 
   getCommentsByPostId: async (id: string) => {
-    const res = await axiosHandler.get(`${url}/post/comment/by_post/${id}`).catch((err) => {
+    const res = await axiosHandler.get(`${url}/post/comments/${id}`).catch((err) => {
       console.log(err);
       return err;
     });
