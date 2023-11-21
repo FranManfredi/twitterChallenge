@@ -11,6 +11,7 @@ import TweetPage from "../../pages/create-tweet-page/TweetPage";
 import CommentPage from "../../pages/create-comment-page/CommentPage";
 import PostPage from "../../pages/post-page/PostPage";
 import { CheckSecurity } from "../../util/securityCheck";
+import MessagesPage from "../../pages/message/MessagePage";
 
 const WithNav = () => {
   return (
@@ -58,6 +59,10 @@ export const ROUTER = createBrowserRouter([
         {
           path: "/post/:id",
           element: <CommentPage />,
+        },
+        {
+          path: "/messages",
+          element: <MessagesPage/>
         },
       ],
     },],

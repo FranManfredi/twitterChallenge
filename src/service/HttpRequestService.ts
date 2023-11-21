@@ -272,6 +272,25 @@ const httpRequestService = {
     });
     return res.data;
   },
+  createChatroom: async (id: string) => {
+    const res = await axiosHandler.post(`/chat/chatroom/${id}`);
+    if (res.status === 200){
+        return res.data;
+    }
+  },
+  getChatrooms: async () => {
+    const res = await axiosHandler.get(`/chat/chatroom/chats`);
+    console.log(res.data)
+    if (res.status === 200){
+        return res.data;
+    }
+  },
+  getChatData: async (id: string) => {
+    const res = await axiosHandler.get(`/chat/chatroom/${id}`);
+    if (res.status === 200){
+        return res.data;
+    }
+  }
 };
 
 const useHttpRequestService = () => httpRequestService;
