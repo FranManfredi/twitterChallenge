@@ -40,13 +40,12 @@ const FeedComment = ({postId, posts }: CommentFeedProps) => {
       console.error("Error fetching more data:", error);
     }
   }
-  
 
   return (
     <InfiniteScroll
       dataLength={postsToShow.length}
       next={fetchMoreDataHandler}
-      hasMore={hasMore}
+      hasMore={postArray.length < 4 ? false : hasMore}
       loader={<Loader />}
       endMessage={<p>No more posts to show</p>}
       scrollableTarget="content-target"
