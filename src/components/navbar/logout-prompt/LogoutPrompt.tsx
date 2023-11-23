@@ -7,9 +7,9 @@ import { useTranslation } from "react-i18next";
 import SwitchButton from "../../switch/SwitchButton";
 import { ButtonType } from "../../button/StyledButton";
 import { useAppSelector } from "../../../redux/hooks";
-import { StyledPromptContainer } from "./PromptContainer";
 import { StyledContainer } from "../../common/Container";
 import { StyledP } from "../../common/text";
+import { StyledPromptContainerPlus } from "./StyledPromptContainerPlus";
 
 interface LogoutPromptProps {
   show: boolean;
@@ -45,7 +45,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
   return (
     <>
       {showPrompt && (
-        <StyledPromptContainer>
+        <StyledPromptContainerPlus>
           <StyledContainer
             flexDirection={"row"}
             gap={"16px"}
@@ -64,7 +64,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
               user.username
             }`}</StyledP>
           </StyledContainer>
-        </StyledPromptContainer>
+        </StyledPromptContainerPlus>
       )}
       <Modal
         show={showModal}

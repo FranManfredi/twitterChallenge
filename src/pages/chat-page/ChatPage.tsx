@@ -1,28 +1,28 @@
-import {useNavigate, useParams} from "react-router-dom";
-import {Author, ChatDTO, MessageDTO} from "../../service";
-import React, {useEffect, useState} from "react";
-import {useHttpRequestService} from "../../service/HttpRequestService";
-import {io} from "socket.io-client";
-import {useAppSelector} from "../../redux/hooks";
-import {StyledContainer} from "../../components/common/Container";
-import {useTranslation} from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
+import { Author, ChatDTO, MessageDTO } from "../../service";
+import React, { useEffect, useRef, useState } from "react";
+import { useHttpRequestService } from "../../service/HttpRequestService";
+import { io } from "socket.io-client";
+import { useAppSelector } from "../../redux/hooks";
+import { StyledContainer } from "../../components/common/Container";
+import { useTranslation } from "react-i18next";
 import ProfileInfo from "../profile/ProfileInfo";
-import {ChatBubbleType, StyledChatBubble} from "./components/StyledChatBubble";
-import {useFormik} from "formik";
+import { useFormik } from "formik";
 import ChatMessage from "./components/ChatMessage";
-import {StyledP} from "../../components/common/text";
-import { StyledInputElement } from "../../components/labeled-input/StyledInputElement";
+import InputElement from "./components/InputElement";
+import { InputType } from "./components/StyledInputContainer";
 
 
-interface MessageValues{
+interface MessageValues {
     content: string;
 }
 
 const ChatPage = () => {
     const [chat, setChat] = useState<ChatDTO | null>(null);
+    const [friend, setFriend] = useState<Author | null>(null);
+    const messagesRef = useRef<HTMLDivElement>(null)
     const service = useHttpRequestService();
     const id = useParams().id;
-    const [friend, setFriend] = useState<Author | null>(null);
     const user = useAppSelector((state) => state.user.user);
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -30,7 +30,6 @@ const ChatPage = () => {
         initialValues: {
             content: '',
         },
-        validationSchema: null,
         onSubmit: values => {
             sendMessage();
         }
@@ -47,25 +46,30 @@ const ChatPage = () => {
 
 
     const sendMessage = () => {
-        if(!chat) return;
-        const newMessage : MessageDTO = {
+        if (!chat) return;
+        const newMessage: MessageDTO = {
             content: formik.values.content,
             chatId: id,
             senderId: user.id,
             createdAt: new Date()
         };
-        socket.emit("message", newMessage);
-        setChat({...chat, messages: [...chat.messages ?? [], newMessage] });
+        socket.emit("message", {...newMessage, to: newMessage.chatId});
+        service.sendMessage(newMessage.chatId, newMessage.content);
+        setChat({ ...chat, messages: [...chat.messages ?? [], newMessage] });
         formik.resetForm();
     }
 
-    const getChat = () => {
-        service.getChatData(id).then((res) => {
-             setChat(res);
-             setFriend(res.users.find((u: Author) => u.id !== user.id) ?? null);
+    const getChat = async () => {
+        await service.getChatData(id).then((res) => {
+            setChat((prevChat) => ({
+                ...prevChat!,
+                id,
+                messages: res.map((message: any) => ({ ...message, content: message.message})),
+                users: res.userId?.filter((u: Author) => u.id !== user.id) ?? [],
+            }));
+            setFriend(res.userId?.find((u: Author) => u.id !== user.id) ?? null);
         });
-    }
-
+    };
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         getChat();
@@ -75,8 +79,9 @@ const ChatPage = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         socket.connect();
-        socket.on(`recieve_message`, (message: MessageDTO) => {
-            if(message.senderId !== user.id) {
+        socket.emit("join", { chatroomId: id });
+        socket.on(`message`, (message: MessageDTO) => {
+            if (message.senderId !== user.id) {
                 console.log(message);
                 setChat(prevChat => ({
                     ...prevChat!,
@@ -88,6 +93,13 @@ const ChatPage = () => {
             socket.disconnect();
         };
     }, []);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (messagesRef.current) {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+        }
+    }, [chat?.messages]);
 
 
     return (
@@ -113,26 +125,29 @@ const ChatPage = () => {
                 gap={"10px"}
                 overflow={"auto"}
                 height={"100vh"}
+                ref={messagesRef}
             >
-                {chat?.messages.map((message: MessageDTO) => {
+                {chat?.messages?.map((message: MessageDTO) => {
                     return (
                         <ChatMessage
+                            key={message.id} // Add a unique key for each message
                             message={message}
                         />
                     );
                 })}
             </StyledContainer>
-            <StyledInputElement
+            <InputElement
                 placeholder={t("placeholder.send")}
                 required
                 id={"content"}
                 name={"content"}
                 value={formik.values.content}
                 onChange={formik.handleChange}
+                inputType={InputType.CHAT}
                 onSubmit={formik.handleSubmit}
             />
         </StyledContainer>
     )
 }
 
-export default ChatPage
+export default ChatPage;

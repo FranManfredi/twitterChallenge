@@ -39,7 +39,6 @@ export const ChatBox = ({
                 flex-direction={"row"}
                 gap={"10px"}
             >
-                <StyledP primary>{user?.name ?? "Name"}</StyledP>
                 <StyledP primary={false}>{"@" + user?.username ?? "@Username"}</StyledP>
                 {lastMessage && <StyledP primary={false}>{new Date(lastMessage.createdAt).toLocaleString("default", {
                     month: "short",

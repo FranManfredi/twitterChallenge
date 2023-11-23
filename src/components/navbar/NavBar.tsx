@@ -18,6 +18,7 @@ import { StyledIconContainer } from "./IconContainer";
 import { StyledNavItemsContainer } from "./navItem/NavItemsContainer";
 import { StyledP } from "../common/text";
 import OutsideAlerter from "../../hooks/OustideAlerter";
+import { NavBarDisplay } from "./NavBarDisplay";
 
 const NavBar = () => {
   const location = useLocation();
@@ -114,7 +115,7 @@ const NavBar = () => {
           onClick={handleAvatarClick}
           alt={user?.name ?? ""}
         />
-        <StyledContainer
+        <NavBarDisplay
           width={"100%"}
           flexDirection={"row"}
           justifyContent={"space-between"}
@@ -125,7 +126,7 @@ const NavBar = () => {
             <StyledP primary={false}>{`@${user.username}`}</StyledP>
           </StyledContainer>
           <ThreeDots onClick={handleLogout} />
-        </StyledContainer>
+        </NavBarDisplay>
       </StyledContainer>
     </StyledNavBarContainer>
   );

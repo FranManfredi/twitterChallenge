@@ -15,12 +15,12 @@ const ChatMessage = (
     }: ChatMessageProps) => {
 
     const user = useAppSelector((state) => state.user.user);
-
+        
     return (
         <StyledContainer
-            align-items={message.senderId === user.id ? "flex-end" : "flex-start"}
+            align-items={message.userId === user.id ? "flex-end" : "flex-start"}
         >
-            <StyledChatBubble chatBubbleType={message.senderId === user.id ? ChatBubbleType.SENT : ChatBubbleType.RECEIVED}>
+            <StyledChatBubble chatBubbleType={message.userId === user.id ? ChatBubbleType.SENT : ChatBubbleType.RECEIVED}>
                 <p>{message.content}</p>
             </StyledChatBubble>
             <StyledP

@@ -273,7 +273,7 @@ const httpRequestService = {
     return res.data;
   },
   createChatroom: async (id: string) => {
-    const res = await axiosHandler.post(`/chat/chatroom/${id}`);
+    const res = await axiosHandler.post(`/chat/create_chatroom/${id}`);
     if (res.status === 200){
         return res.data;
     }
@@ -286,7 +286,13 @@ const httpRequestService = {
     }
   },
   getChatData: async (id: string) => {
-    const res = await axiosHandler.get(`/chat/chatroom/${id}`);
+    const res = await axiosHandler.get(`/chat/${id}`);
+    if (res.status === 200){
+        return res.data;
+    }
+  },
+  sendMessage: async (id: string, message: string) => {
+    const res = await axiosHandler.post(`/chat/${id}`, {message});
     if (res.status === 200){
         return res.data;
     }

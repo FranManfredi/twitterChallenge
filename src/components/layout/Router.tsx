@@ -12,6 +12,7 @@ import CommentPage from "../../pages/create-comment-page/CommentPage";
 import PostPage from "../../pages/post-page/PostPage";
 import { CheckSecurity } from "../../util/securityCheck";
 import MessagesPage from "../../pages/message/MessagePage";
+import ChatPage from "../../pages/chat-page/ChatPage";
 
 const WithNav = () => {
   return (
@@ -64,6 +65,10 @@ export const ROUTER = createBrowserRouter([
           path: "/messages",
           element: <MessagesPage/>
         },
+        {
+          path: "/messages/:id",
+          element: <ChatPage/>
+        }
       ],
     },],
   },
