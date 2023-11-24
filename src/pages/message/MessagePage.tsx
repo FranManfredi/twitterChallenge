@@ -56,7 +56,6 @@ const MessagesPage = () => {
         <StyledContainer
             borderRight={"1px solid #ebeef0"}
             flex={2}
-            maxWidth={"700px"}
         >
             <StyledContainer
                 borderBottom={"1px solid #ebeef0"}
