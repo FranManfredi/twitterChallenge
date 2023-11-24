@@ -7,7 +7,7 @@ import AuthWrapper from "../../../pages/auth/AuthWrapper";
 import { useHttpRequestService } from "../../../service/HttpRequestService";
 import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
-import { ButtonType } from "../../../components/button/StyledButton";
+import { ButtonSize, ButtonType } from "../../../components/button/StyledButton";
 import { StyledH3 } from "../../../components/common/text";
 import { ErrorText } from "../../../components/error-text/ErrorText";
 import * as Yup from "yup";
@@ -122,13 +122,13 @@ const SignUpPage = () => {
                 <Button
                   text={t("buttons.register")}
                   buttonType={ButtonType.FOLLOW}
-                  size={"MEDIUM"}
+                  size={ButtonSize.MEDIUM}
                   type="submit"
                 />
                 <Button
                   text={t("buttons.login")}
                   buttonType={ButtonType.OUTLINED}
-                  size={"MEDIUM"}
+                  size={ButtonSize.MEDIUM}
                   onClick={() => navigate("/sign-in")}
                 />
               </div>

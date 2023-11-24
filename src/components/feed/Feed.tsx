@@ -9,9 +9,10 @@ import { useHttpRequestService } from "../../service/HttpRequestService";
 interface FeedProps {
   posts: Post[] | Post;
   loading: boolean;
+  scrollableTarget: string;
 }
 
-const Feed = ({ posts, loading }: FeedProps) => {
+const Feed = ({ posts, loading , scrollableTarget}: FeedProps) => {
   const http = useHttpRequestService();
 
   const postArray = Array.isArray(posts) ? posts : [posts];
@@ -49,7 +50,7 @@ const Feed = ({ posts, loading }: FeedProps) => {
       hasMore={hasMore}
       loader={<Loader />}
       endMessage={<p>No more posts to show</p>}
-      scrollableTarget="content-container"
+      scrollableTarget={scrollableTarget}
     >
       <StyledContainer width={'100%'} alignItems={'center'}>
         {postsToShow.map((post: Post) => (

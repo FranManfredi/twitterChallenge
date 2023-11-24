@@ -9,7 +9,7 @@ import Avatar from "../common/avatar/Avatar";
 import LogoutPrompt from "./logout-prompt/LogoutPrompt";
 import ThreeDots from "../common/ThreeDots";
 import { useTranslation } from "react-i18next";
-import { ButtonType } from "../button/StyledButton";
+import { ButtonSize, ButtonType } from "../button/StyledButton";
 import Icon from "../../assets/icon.jpg";
 import { useAppSelector } from "../../redux/hooks";
 import { StyledNavBarContainer } from "./NavBarContainer";
@@ -86,7 +86,7 @@ const NavBar = () => {
         <StyledContainer width={"100%"}>
           <Button
             text={"Tweet"}
-            size={"180px"}
+            size={ButtonSize.MEDIUM}
             buttonType={ButtonType.DEFAULT}
             onClick={() => {
               setTweetModalOpen(true);

@@ -5,7 +5,7 @@ import Button from "../../button/Button";
 import { updateFeed } from "../../../redux/user";
 import { useHttpRequestService } from "../../../service/HttpRequestService";
 import { useTranslation } from "react-i18next";
-import { ButtonType } from "../../button/StyledButton";
+import { ButtonSize, ButtonType } from "../../button/StyledButton";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { Post } from "../../../service";
 import { StyledDeletePostModalContainer } from "./DeletePostModalContainer";
@@ -70,7 +70,7 @@ export const DeletePostModal = ({
                   <Button
                     text={t("buttons.delete")}
                     buttonType={ButtonType.DELETE}
-                    size={"MEDIUM"}
+                    size={ButtonSize.MEDIUM}
                     onClick={handleDelete}
                   />
                 }

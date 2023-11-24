@@ -5,6 +5,6 @@ import { useGetFeed } from "../../hooks/useGetFeed";
 const ContentFeed = () => {
   const { posts, loading } = useGetFeed(6, "");
 
-  return <Feed posts={posts} loading={loading} />;
+  return <Feed posts={posts} loading={loading} scrollableTarget="content-container"/>;
 };
 export default ContentFeed;

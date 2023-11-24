@@ -51,7 +51,8 @@ const ChatPage = () => {
             content: formik.values.content,
             chatId: id,
             senderId: user.id,
-            createdAt: new Date()
+            createdAt: new Date(),
+            userId: user.id,
         };
         socket.emit("message", {...newMessage, to: newMessage.chatId});
         service.sendMessage(newMessage.chatId, newMessage.content);
