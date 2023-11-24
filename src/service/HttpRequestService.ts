@@ -296,6 +296,12 @@ const httpRequestService = {
     if (res.status === 200){
         return res.data;
     }
+  },
+  getPosibleChats: async () => {
+    const res = await axiosHandler.get(`${url}/chat/posible_chats`);
+    if (res.status === 200){
+        return res.data;
+    }
   }
 };
 
