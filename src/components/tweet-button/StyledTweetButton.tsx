@@ -26,9 +26,9 @@ export const StyledTweetButton = styled.button`
   }
 
   @media (max-width: 600px) {
-    position: absolute;
-    top: -70px;
-    right: 16px;
+    position: fixed;
+    bottom: 1%;
+    right: 8%;
     z-index: 1;
   }
 `;

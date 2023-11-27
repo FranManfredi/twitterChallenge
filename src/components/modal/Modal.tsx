@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import { StyledBlurredBackground } from "../common/BlurredBackground";
 import Button from "../button/Button";
-import { ButtonType } from "../button/StyledButton";
+import { ButtonSize, ButtonType } from "../button/StyledButton";
 import { StyledModalContainer } from "./ModalContainer";
 import { StyledContainer } from "../common/Container";
 import { StyledH5, StyledP } from "../common/text";
 import OutsideAlerter from "../../hooks/OustideAlerter";
-import {createPortal} from "react-dom";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   show: boolean;
@@ -52,7 +52,7 @@ const Modal = ({
                     <Button
                       buttonType={ButtonType.OUTLINED}
                       text={"Cancel"}
-                      size={"MEDIUM"}
+                      size={ButtonSize.MEDIUM}
                       onClick={onClose}
                     />
                   </StyledContainer>
@@ -62,7 +62,8 @@ const Modal = ({
           </OutsideAlerter>
         </StyledBlurredBackground>
       )}
-    </>, document.body
+    </>,
+    document.body
   );
 };
 

@@ -1,22 +1,29 @@
 import React, { MouseEventHandler } from "react";
-import { ButtonType, StyledButton } from "./StyledButton";
+import { ButtonSize, ButtonType, StyledButton } from "./StyledButton";
 
 interface ButtonProps {
   text: string;
-  size: string;
+  size: ButtonSize;
   buttonType: ButtonType;
   onClick?: MouseEventHandler;
   disabled?: boolean;
-  type?: string;
+  type?: "submit" | "reset" | "button";
 }
-const Button = ({ text, size, buttonType, onClick, disabled, type }: ButtonProps) => {
+const Button = ({
+  text,
+  size,
+  buttonType,
+  onClick,
+  disabled,
+  type,
+}: ButtonProps) => {
   return (
     <StyledButton
       size={size}
       buttonType={disabled ? ButtonType.DISABLED : buttonType}
       disabled={buttonType === "DISABLED" || (disabled ? disabled : false)}
       onClick={onClick}
-      type={ type === "submit" ? "submit" : "button"}
+      type={type ? type : "button"}
     >
       {text}
     </StyledButton>

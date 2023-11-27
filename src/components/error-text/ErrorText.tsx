@@ -1,10 +1,15 @@
-
 import { ErrorItem } from "../../pages/auth/sign-up/SignUpPage";
 import { useTranslation } from "react-i18next";
 
-
-
-export const ErrorText = ({ propName, error, errors }: { propName: string; error: boolean; errors: ErrorItem[] }) => {
+export const ErrorText = ({
+  propName,
+  error,
+  errors,
+}: {
+  propName: string;
+  error: boolean;
+  errors: ErrorItem[];
+}) => {
   const { t } = useTranslation();
 
   try {
@@ -17,14 +22,13 @@ export const ErrorText = ({ propName, error, errors }: { propName: string; error
         })
         .join(", ");
 
-      return (
-        <p className="error-message">
-          {errorMessages}
-        </p>
-      );
+      return <p className="error-message">{errorMessages}</p>;
     }
   } catch (e) {
-    if ((errors as any).error_code === "Mail already exists" && propName === "email") {
+    if (
+      (errors as any).error_code === "Mail already exists" &&
+      propName === "email"
+    ) {
       return (
         <p className="error-message">
           {t("Acount with this email already exists")}

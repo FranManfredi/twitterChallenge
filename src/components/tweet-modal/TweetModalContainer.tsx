@@ -15,7 +15,7 @@ export const StyledTweetModalContainer = styled.div`
   align-items: flex-start;
   flex-shrink: 0;
   border-radius: 16px;
-  
+
   p {
     margin: 0;
   }

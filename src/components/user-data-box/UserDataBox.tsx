@@ -33,7 +33,9 @@ export const UserDataBox = ({
       />
       <StyledUserDataBoxUserInfoContainer>
         <StyledUserDataBoxText>{name ?? "Name"}</StyledUserDataBoxText>
-        <StyledUserDataBoxText style={{ color: "#566370" }}>{"@" + username ?? "@Username"}</StyledUserDataBoxText>
+        <StyledUserDataBoxText style={{ color: "#566370" }}>
+          {"@" + username ?? "@Username"}
+        </StyledUserDataBoxText>
       </StyledUserDataBoxUserInfoContainer>
     </StyledUserDataBoxUserContainer>
   );

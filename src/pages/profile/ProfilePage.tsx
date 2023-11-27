@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
 import { useTranslation } from "react-i18next";
 import { User } from "../../service";
-import { ButtonType } from "../../components/button/StyledButton";
+import { ButtonSize, ButtonType } from "../../components/button/StyledButton";
 import { useAppSelector } from "../../redux/hooks";
 import { useHttpRequestService } from "../../service/HttpRequestService";
 import Button from "../../components/button/Button";
@@ -91,9 +91,7 @@ const ProfilePage = () => {
       .getProfile(id)
       .then((res) => {
         setProfile(res);
-        setFollowing(
-          res.isFollowingMe
-        );
+        setFollowing(res.isFollowingMe);
       })
       .catch(() => {
         service
@@ -116,7 +114,6 @@ const ProfilePage = () => {
         maxHeight={"100vh"}
         borderRight={"1px solid #ebeef0"}
         flex={2}
-        maxWidth={"600px"}
       >
         {profile && (
           <>
@@ -138,18 +135,14 @@ const ProfilePage = () => {
                 />
                 <Button
                   buttonType={handleButtonType().component}
-                  size={"100px"}
+                  size={ButtonSize.SMALL}
                   onClick={handleButtonAction}
                   text={handleButtonType().text}
                 />
               </StyledContainer>
             </StyledContainer>
-            <StyledContainer width={"100%"}>
-              { profile ? (
-                <ProfileFeed />
-              ) : (
-                <StyledH5>Private account</StyledH5>
-              )}
+            <StyledContainer width={"100%"} overflow="auto" id="profile_feed">
+              {profile ? <ProfileFeed /> : <StyledH5>Private account</StyledH5>}
             </StyledContainer>
             <Modal
               show={showModal}
@@ -159,7 +152,7 @@ const ProfilePage = () => {
                 <Button
                   buttonType={modalValues.type}
                   text={modalValues.buttonText}
-                  size={"MEDIUM"}
+                  size={ButtonSize.MEDIUM}
                   onClick={handleSubmit}
                 />
               }

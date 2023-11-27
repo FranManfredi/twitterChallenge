@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import React from "react";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 
 export interface StyledButtonProps {
   size: string;
@@ -57,7 +57,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     if (outlined) return buttonVariantStyles.outlined;
     if (fulfilled) return buttonVariantStyles.fulfilled;
     if (ghost) return buttonVariantStyles.ghost;
-    return ''; // Provide a default style or handle accordingly
+    return ""; // Provide a default style or handle accordingly
   }}
 
   ${({ size }) => buttonSizeStyles[size]}

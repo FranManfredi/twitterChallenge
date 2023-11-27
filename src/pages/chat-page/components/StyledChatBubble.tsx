@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export enum ChatBubbleType {
-    SENT = "SENT",
-    RECEIVED = "RECEIVED",
-    ERROR = "ERROR",
+  SENT = "SENT",
+  RECEIVED = "RECEIVED",
+  ERROR = "ERROR",
 }
 
 export interface ChatBubbleProps {
-    chatBubbleType: ChatBubbleType;
+  chatBubbleType: ChatBubbleType;
 }
 
 export const StyledChatBubble = styled.div<ChatBubbleProps>`
@@ -23,30 +23,30 @@ export const StyledChatBubble = styled.div<ChatBubbleProps>`
 `;
 
 const getChatBubbleStyle = (props: any) => {
-    switch (props.chatBubbleType) {
-        case ChatBubbleType.SENT:
-            return {
-                "align-self": "flex-end",
-                "background-color": props.theme.colors.dark,
-                "border-radius": "25px 25px 0px 25px",
-            };
-        case ChatBubbleType.RECEIVED:
-            return {
-                "align-self": "flex-start",
-                "background-color": props.theme.colors.text,
-                "border-radius": "25px 25px 25px 0px",
-            };
-        case ChatBubbleType.ERROR:
-            return {
-                "align-self": "flex-end",
-                "background-color": props.theme.colors.error,
-                "border-radius": "25px 25px 0px 25px",
-            };
-        default:
-            return {
-                "align-self": "flex-end",
-                "background-color": props.theme.colors.dark,
-                "border-radius": "25px 25px 0px 25px",
-            };
-    }
-}
+  switch (props.chatBubbleType) {
+    case ChatBubbleType.SENT:
+      return {
+        "align-self": "flex-end",
+        "background-color": props.theme.colors.dark,
+        "border-radius": "25px 25px 0px 25px",
+      };
+    case ChatBubbleType.RECEIVED:
+      return {
+        "align-self": "flex-start",
+        "background-color": props.theme.colors.text,
+        "border-radius": "25px 25px 25px 0px",
+      };
+    case ChatBubbleType.ERROR:
+      return {
+        "align-self": "flex-end",
+        "background-color": props.theme.colors.error,
+        "border-radius": "25px 25px 0px 25px",
+      };
+    default:
+      return {
+        "align-self": "flex-end",
+        "background-color": props.theme.colors.dark,
+        "border-radius": "25px 25px 0px 25px",
+      };
+  }
+};

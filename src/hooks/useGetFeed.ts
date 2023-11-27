@@ -3,7 +3,7 @@ import { useHttpRequestService } from "../service/HttpRequestService";
 import { setLength, updateFeed } from "../redux/user";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-export const useGetFeed = (limit: number, after:string) => {
+export const useGetFeed = (limit: number, after: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const posts = useAppSelector((state) => state.user.feed);

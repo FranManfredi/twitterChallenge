@@ -9,7 +9,7 @@ import Avatar from "../common/avatar/Avatar";
 import LogoutPrompt from "./logout-prompt/LogoutPrompt";
 import ThreeDots from "../common/ThreeDots";
 import { useTranslation } from "react-i18next";
-import { ButtonType } from "../button/StyledButton";
+import { ButtonSize, ButtonType } from "../button/StyledButton";
 import Icon from "../../assets/icon.jpg";
 import { useAppSelector } from "../../redux/hooks";
 import { StyledNavBarContainer } from "./NavBarContainer";
@@ -18,6 +18,7 @@ import { StyledIconContainer } from "./IconContainer";
 import { StyledNavItemsContainer } from "./navItem/NavItemsContainer";
 import { StyledP } from "../common/text";
 import OutsideAlerter from "../../hooks/OustideAlerter";
+import { NavBarDisplay } from "./NavBarDisplay";
 
 const NavBar = () => {
   const location = useLocation();
@@ -85,7 +86,7 @@ const NavBar = () => {
         <StyledContainer width={"100%"}>
           <Button
             text={"Tweet"}
-            size={"180px"}
+            size={ButtonSize.MEDIUM}
             buttonType={ButtonType.DEFAULT}
             onClick={() => {
               setTweetModalOpen(true);
@@ -114,7 +115,7 @@ const NavBar = () => {
           onClick={handleAvatarClick}
           alt={user?.name ?? ""}
         />
-        <StyledContainer
+        <NavBarDisplay
           width={"100%"}
           flexDirection={"row"}
           justifyContent={"space-between"}
@@ -125,7 +126,7 @@ const NavBar = () => {
             <StyledP primary={false}>{`@${user.username}`}</StyledP>
           </StyledContainer>
           <ThreeDots onClick={handleLogout} />
-        </StyledContainer>
+        </NavBarDisplay>
       </StyledContainer>
     </StyledNavBarContainer>
   );

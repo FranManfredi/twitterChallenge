@@ -6,6 +6,6 @@ interface UseGetCommentsProps {
 
 export const GetComments = async ({ postId }: UseGetCommentsProps) => {
   const service = useHttpRequestService();
-  const post = await service.getPaginatedCommentsByPostId(postId, 4, "")
+  const post = await service.getPaginatedCommentsByPostId(postId, 4, "");
   return post;
 };

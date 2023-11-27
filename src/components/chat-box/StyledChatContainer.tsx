@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-
 export const StyledChatContainer = styled.div`
+  display: table-column;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -13,8 +14,8 @@ export const StyledChatContainer = styled.div`
   cursor: pointer;
   transition: 0.3s ease-in-out;
   box-sizing: border-box;
-  
-    &:hover {
-        background-color: ${(props) => props.theme.colors.hover};
-    }
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.hover};
+  }
 `;

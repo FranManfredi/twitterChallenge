@@ -40,6 +40,7 @@ export interface Reaction {
 }
 export interface Author {
   id: string;
+  userId?: string;
   name?: string;
   username: string;
   profilePicture?: string;
@@ -60,12 +61,14 @@ export interface User {
 }
 
 export interface MessageDTO {
+  userId?: string;
   id?: string;
   content: string;
   createdAt: Date;
   chatId: string;
   senderId: string;
   sender?: Author;
+  me?: boolean;
 }
 
 export interface ChatDTO {

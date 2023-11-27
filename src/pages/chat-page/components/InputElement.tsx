@@ -1,27 +1,36 @@
 import React, { ChangeEvent, useRef, useState } from "react";
-import { StyledInputContainer } from "./InputContainer";
-import { StyledInputTitle } from "./InputTitle";
+import { InputType, StyledInputContainer } from "./StyledInputContainer";
 import { StyledInputElement } from "./StyledInputElement";
+import { StyledInputLabel } from "./StyledInputLabel";
+import { ChatIcon } from "./Icon";
 
-interface InputWithLabelProps {
+interface InputElementProps {
   type?: "password" | "text";
-  title: string;
+  title?: string;
   placeholder: string;
   required: boolean;
   error?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
+  id: string;
+  name: string;
+  value: string;
+  inputType: InputType;
+  onSubmit?: () => void;
 }
 
-const LabeledInput = ({
+const InputElement = ({
   title,
   placeholder,
   required,
   error,
   onChange,
   type = "text",
+  id,
   name,
-}: InputWithLabelProps) => {
+  value,
+  inputType,
+  onSubmit,
+}: InputElementProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [focus, setFocus] = useState(false);
 
@@ -41,14 +50,17 @@ const LabeledInput = ({
 
   return (
     <StyledInputContainer
-      className={`${error ? "error" : ""}`}
+      inputType={inputType}
       onClick={handleClick}
+      className={`${error ? "error" : ""}`}
     >
-      <StyledInputTitle
-        className={`${focus ? "active-label" : ""} ${error ? "error" : ""}`}
-      >
-        {title}
-      </StyledInputTitle>
+      {title && (
+        <StyledInputLabel
+          className={`${focus ? "active-label" : ""} ${error ? "error" : ""}`}
+        >
+          {title}
+        </StyledInputLabel>
+      )}
       <StyledInputElement
         type={type}
         required={required}
@@ -56,12 +68,15 @@ const LabeledInput = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
-        className={error ? "error" : ""}
-        ref={inputRef}
+        id={id}
         name={name}
+        value={value}
+        ref={inputRef}
+        className={`${focus ? "active-div" : ""} ${error ? "error" : ""}`}
       />
+      {onSubmit && <ChatIcon onClick={onSubmit} />}
     </StyledInputContainer>
   );
 };
 
-export default LabeledInput;
+export default InputElement;

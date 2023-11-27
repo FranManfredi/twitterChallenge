@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { CSSObject } from "styled-components";
 import "@fontsource/manrope";
 
 interface ButtonProps {
-  size: string;
+  size: ButtonSize;
   buttonType: ButtonType;
 }
 export enum ButtonType {
@@ -12,77 +12,126 @@ export enum ButtonType {
   OUTLINED = "OUTLINED",
   DISABLED = "DISABLED",
 }
+
+export enum ButtonSize {
+  SMALL = "SMALL",
+  MEDIUM = "MEDIUM",
+  LARGE = "LARGE",
+}
+
 export const StyledButton = styled.button<ButtonProps>`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px;
-    gap: 8px;
-    margin-bottom: 8px;
-    width: ${(props) => props.size};
-    height: 33px;
-    left: 16px;
-    top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${(props) => getButtonSizeCss(props.size).padding};
+  gap: 8px;
+  margin-bottom: 8px;
+  height: 33px;
+  left: 16px;
+  top: 16px;
 
-    background: ${(props) => {
-      switch (props.buttonType) {
-        case "DEFAULT":
-          return props.theme.colors.main;
-        case "FOLLOW":
-          return props.theme.colors.black;
-        case "DELETE":
-          return props.theme.colors.error;
-        case "OUTLINED":
-          return props.theme.colors.white;
-        case "DISABLED":
-          return props.theme.colors.light;
-        default:
-          return props.theme.colors.main;
-      }
-    }};
-    border-radius: 40px;
+  background: ${(props) => getButtonTypeCss(props).background};
+  border-radius: 40px;
 
-    /* Button */
-    font-family: ${(props) => props.theme.font.default};
-    font-style: normal;
-    font-weight: 800;
-    font-size: 15px;
-    line-height: 110%;
+  /* Button */
+  font-family: ${(props) => props.theme.font.default};
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 110%;
 
-    border: ${(props) =>
-      props.buttonType === "OUTLINED"
-        ? `1px solid ${props.theme.colors.outline}`
-        : "none"};
+  border: ${(props) => getButtonTypeCss(props).border};
 
-    color: ${(props) =>
-      props.buttonType === "OUTLINED"
-        ? props.theme.colors.black
-        : props.theme.colors.white};
+  color: ${(props) => getButtonTypeCss(props).color};
 
-    text-align: center;
+  text-align: center;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: 0.3s;
+  transition: 0.3s;
 
-    &:active {
-        transform: scale(0.95);
-    }
+  &:active {
+    transform: scale(0.95);
+  }
 
-    &:hover {
-        background: ${(props) => {
-          switch (props.buttonType) {
-            case ButtonType.DEFAULT:
-              return props.theme.hover.default;
-            case ButtonType.FOLLOW:
-              return props.theme.hover.follow;
-            case ButtonType.DELETE:
-              return props.theme.hover.error;
-            case ButtonType.OUTLINED:
-              return props.theme.hover.outlined;
-            case ButtonType.DISABLED:
-              return props.theme.hover.disabled;
-          }
-        }}
+  &:hover {
+    ${(props) => getButtonTypeCss(props)["&:hover"]}
+  }
 `;
+
+const getButtonSizeCss = (size: ButtonSize): CSSObject => {
+  switch (size) {
+    case ButtonSize.SMALL:
+      return {
+        padding: "8px 16px",
+      };
+    case ButtonSize.MEDIUM:
+      return {
+        padding: "8px 80px",
+      };
+    case ButtonSize.LARGE:
+      return {
+        padding: "8px 192px",
+      };
+  }
+};
+
+const getButtonTypeCss = (props: any): CSSObject => {
+  switch (props.buttonType) {
+    case ButtonType.DEFAULT:
+      return {
+        background: props.theme.colors.main,
+        border: "none",
+        color: props.theme.colors.white,
+        "&:hover": {
+          background: props.theme.hover.default,
+        },
+      };
+    case ButtonType.FOLLOW:
+      return {
+        background: props.theme.colors.black,
+        border: "none",
+        color: props.theme.colors.white,
+        "&:hover": {
+          background: props.theme.hover.follow,
+        },
+      };
+    case ButtonType.DELETE:
+      return {
+        background: props.theme.colors.error,
+        border: "none",
+        color: props.theme.colors.white,
+        "&:hover": {
+          background: props.theme.hover.error,
+        },
+      };
+    case ButtonType.OUTLINED:
+      return {
+        background: props.theme.colors.white,
+        border: `1px solid ${props.theme.colors.outline}`,
+        color: props.theme.colors.black,
+        "&:hover": {
+          background: props.theme.hover.outlined,
+        },
+      };
+    case ButtonType.DISABLED:
+      return {
+        background: props.theme.colors.light,
+        border: "none",
+        color: props.theme.colors.white,
+        "&:hover": {
+          background: props.theme.hover.disabled,
+        },
+      };
+    default:
+      return {
+        background: props.theme.colors.main,
+        border: "none",
+        color: props.theme.colors.white,
+        "&:hover": {
+          background: props.theme.hover.default,
+        },
+      };
+  }
+};
 export default StyledButton;

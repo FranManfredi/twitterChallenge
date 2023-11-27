@@ -38,7 +38,7 @@ export const StyledHeaderContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    max-width: 600px;
+    max-width: 6px;
 
     .logo {
       display: flex;

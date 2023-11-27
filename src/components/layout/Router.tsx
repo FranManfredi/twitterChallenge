@@ -12,6 +12,7 @@ import CommentPage from "../../pages/create-comment-page/CommentPage";
 import PostPage from "../../pages/post-page/PostPage";
 import { CheckSecurity } from "../../util/securityCheck";
 import MessagesPage from "../../pages/message/MessagePage";
+import ChatPage from "../../pages/chat-page/ChatPage";
 
 const WithNav = () => {
   return (
@@ -32,39 +33,45 @@ export const ROUTER = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    element: <CheckSecurity/>,
-    children: [{
-      element: <WithNav />,
-      children: [
-        {
-          path: "/",
-          element: <HomePage />,
-        },
-        {
-          path: "/recommendations",
-          element: <RecommendationPage />,
-        },
-        {
-          path: "/profile/:id",
-          element: <ProfilePage />,
-        },
-        {
-          path: "/post/:id",
-          element: <PostPage />,
-        },
-        {
-          path: "/compose/tweet",
-          element: <TweetPage />,
-        },
-        {
-          path: "/post/:id",
-          element: <CommentPage />,
-        },
-        {
-          path: "/messages",
-          element: <MessagesPage/>
-        },
-      ],
-    },],
+    element: <CheckSecurity />,
+    children: [
+      {
+        element: <WithNav />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/recommendations",
+            element: <RecommendationPage />,
+          },
+          {
+            path: "/profile/:id",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/post/:id",
+            element: <PostPage />,
+          },
+          {
+            path: "/compose/tweet",
+            element: <TweetPage />,
+          },
+          {
+            path: "/post/:id",
+            element: <CommentPage />,
+          },
+          {
+            path: "/messages",
+            element: <MessagesPage />,
+          },
+          {
+            path: "/messages/:id",
+            element: <ChatPage />,
+          },
+        ],
+      },
+    ],
   },
 ]);
