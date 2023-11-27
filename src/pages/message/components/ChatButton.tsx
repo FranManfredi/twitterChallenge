@@ -4,7 +4,8 @@ import {useState} from "react";
 import Button from "../../../components/button/Button";
 import {ButtonSize, ButtonType} from "../../../components/button/StyledButton";
 import {useTranslation} from "react-i18next";
-import CreateChatModal from "./ChatModal";
+import { ChatModal } from "./ChatModal";
+
 
 
 const ChatButton = () => {
@@ -26,7 +27,7 @@ const ChatButton = () => {
                 onClick={handleClick}
             />
             {showModal && (
-                <CreateChatModal onClose={() => setShowModal(false)} show={showModal} />
+                <ChatModal onClose={() => setShowModal(false)} show={showModal} />
             )}
         </>
     )
