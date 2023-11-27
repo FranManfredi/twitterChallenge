@@ -226,7 +226,7 @@ const httpRequestService = {
 
   createChat: async (id: string) => {
     const res = await axiosHandler.post(
-      `${url}/chat`, { users: [id] }).catch((err) => {
+      `${url}/chat/create_chat/${id}`).catch((err) => {
         console.log(err);
         return err;
       });

@@ -37,10 +37,9 @@ export const ChatModal = ({ onClose, show }: ChatModalProps) => {
     }
   }, [show]);
 
-  const handleClick = (id: string) => {
-    service.createChat(id).then((res: User) => {
-      console.log(res);
-      navigate(`/messages/${res.id}`);
+  const handleClick = async (id: string) => {
+    await service.createChat(id).then(() => {
+      navigate(`/messages/${id}`);
     });
   };
 
@@ -59,7 +58,11 @@ export const ChatModal = ({ onClose, show }: ChatModalProps) => {
             name={user.name}
             username={user.username}
             profilePicture={user.profilePicture}
-            onClick={() => handleClick(user.id)}
+            onClick={() =>{ 
+
+              handleClick(user.id)
+              
+            }}
           />
         ))}
       </StyledContainer>
