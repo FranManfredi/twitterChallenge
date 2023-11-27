@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 
 export const StyledChatContainer = styled.div`
+  display: table-column;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;

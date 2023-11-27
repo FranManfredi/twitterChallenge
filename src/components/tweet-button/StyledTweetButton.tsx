@@ -27,8 +27,8 @@ export const StyledTweetButton = styled.button`
 
   @media (max-width: 600px) {
     position: fixed;
-    bottom: 4%;
-    right: 4%;
+    bottom: 1%;
+    right: 8%;
     z-index: 1;
   }
 `;

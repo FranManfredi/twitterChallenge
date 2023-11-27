@@ -9,6 +9,7 @@ import {useTranslation} from "react-i18next";
 import {io} from "socket.io-client";
 import ChatBox from "../../components/chat-box/chatBox";
 import ChatButton from "./components/ChatButton";
+import { StyledChatContainer } from "../../components/common/StyledChatContainer";
 
 
 const MessagesPage = () => {
@@ -54,7 +55,7 @@ const MessagesPage = () => {
 
 
     return (
-        <StyledContainer
+        <StyledChatContainer
             borderRight={"1px solid #ebeef0"}
             flex={2}
         >
@@ -81,7 +82,7 @@ const MessagesPage = () => {
                 />
             ))}
             </StyledContainer>
-        </StyledContainer>
+        </StyledChatContainer>
     )
 };
 

@@ -124,7 +124,7 @@ const ChatPage = () => {
                 padding={"16px"}
                 gap={"10px"}
                 overflow={"auto"}
-                height={"100vh"}
+                height={"66vh"}
                 ref={messagesRef}
             >
                 {chat?.messages?.map((message: MessageDTO) => {
