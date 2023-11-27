@@ -1,12 +1,10 @@
-import React from 'react';
-import { StyledInputElement } from './StyledField';
-; // Replace with the actual path
-
+import React from "react";
+import { StyledInputElement } from "./StyledField"; // Replace with the actual path
 interface MyInputFieldProps {
-    name: string;
-    type: string;
-    placeholder: string;
-    size: 'small' | 'medium' | 'large';
+  name: string;
+  type: string;
+  placeholder: string;
+  size: "small" | "medium" | "large";
 }
 
 const MyInputField: React.FC<MyInputFieldProps> = (props) => {

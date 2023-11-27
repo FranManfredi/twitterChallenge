@@ -17,7 +17,9 @@ export const SearchResultModal = ({
       {show && (
         <StyledContainer style={{ width: "100%" }}>
           <StyledSearchResultModalContainer>
-            {(results?.length === 0 ? <div>No results</div> : 
+            {results?.length === 0 ? (
+              <div>No results</div>
+            ) : (
               results?.map((author) => {
                 return (
                   <UserDataBox
@@ -28,7 +30,8 @@ export const SearchResultModal = ({
                     profilePicture={author.profilePicture!}
                   />
                 );
-              }))}
+              })
+            )}
           </StyledSearchResultModalContainer>
         </StyledContainer>
       )}

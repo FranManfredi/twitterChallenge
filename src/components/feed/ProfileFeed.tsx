@@ -7,7 +7,7 @@ const ProfileFeed = () => {
 
   return (
     <>
-      <Feed posts={posts} loading={loading} scrollableTarget="profile_feed"/>
+      <Feed posts={posts} loading={loading} scrollableTarget="profile_feed" />
     </>
   );
 };

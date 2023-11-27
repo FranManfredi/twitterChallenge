@@ -9,7 +9,6 @@ import UserDataBox from "../../../components/user-data-box/UserDataBox";
 import { StyledBlurredBackground } from "../../../components/common/BlurredBackground";
 import { StyledChatModalContainer } from "../../../components/tweet-modal/ChatModalContainer";
 
-
 interface ChatModalProps {
   onClose: () => void;
   show: boolean;
@@ -48,23 +47,21 @@ export const ChatModal = ({ onClose, show }: ChatModalProps) => {
   };
 
   const modalContent = (
-      <StyledContainer gap={"10px"}>
-        <StyledH5>{t('buttons.new-chat')}</StyledH5>
-        {users.map((user) => (
-          <UserDataBox
-            key={user.id}
-            id={user.id}
-            name={user.name}
-            username={user.username}
-            profilePicture={user.profilePicture}
-            onClick={() =>{ 
-
-              handleClick(user.id)
-              
-            }}
-          />
-        ))}
-      </StyledContainer>
+    <StyledContainer gap={"10px"}>
+      <StyledH5>{t("buttons.new-chat")}</StyledH5>
+      {users.map((user) => (
+        <UserDataBox
+          key={user.id}
+          id={user.id}
+          name={user.name}
+          username={user.username}
+          profilePicture={user.profilePicture}
+          onClick={() => {
+            handleClick(user.id);
+          }}
+        />
+      ))}
+    </StyledContainer>
   );
 
   return show ? (

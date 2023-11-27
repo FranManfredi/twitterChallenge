@@ -1,13 +1,13 @@
-import { Field } from 'formik';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
- // Replace with the actual import for your Field component
+import { Field } from "formik";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
+// Replace with the actual import for your Field component
 
 interface StyledInputElementProps {
   outlined?: boolean;
   fulfilled?: boolean;
   ghost?: boolean;
   white?: boolean;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
 }
 
 interface InputSizeStyles {
@@ -71,6 +71,6 @@ export const StyledInputElement = styled(Field)<StyledInputElementProps>`
 
     return styles;
   }}
-  
-    ${({ size }: StyledInputElementProps) => inputSizeStyles[size]}
+
+  ${({ size }: StyledInputElementProps) => inputSizeStyles[size]}
 `;

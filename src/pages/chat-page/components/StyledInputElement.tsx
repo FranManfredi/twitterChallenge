@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledInputElement = styled.input`
   display: flex;
   border: none;

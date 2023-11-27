@@ -1,7 +1,7 @@
 import React from "react";
 import TweetBox from "../tweet-box/TweetBox";
 import { PostModal } from "../post-modal/PostModal";
-import {createPortal} from "react-dom";
+import { createPortal } from "react-dom";
 
 interface TweetModalProps {
   open: boolean;
@@ -14,7 +14,8 @@ export const TweetModal = ({ open, onClose }: TweetModalProps) => {
       <PostModal show={open} onClose={onClose}>
         <TweetBox close={onClose} parentId={""} mobile={false} />
       </PostModal>
-    </>, document.body
+    </>,
+    document.body
   );
 };
 export default TweetModal;

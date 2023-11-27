@@ -40,6 +40,7 @@ export interface Reaction {
 }
 export interface Author {
   id: string;
+  userId?: string;
   name?: string;
   username: string;
   profilePicture?: string;

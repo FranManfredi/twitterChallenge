@@ -35,7 +35,10 @@ export const SearchBar = () => {
         value={query}
         placeholder={t("placeholder.search")}
       />
-      <SearchResultModal show={query?.length > 0 ? true : false} results={results} />
+      <SearchResultModal
+        show={query?.length > 0 ? true : false}
+        results={results}
+      />
     </StyledSearchBarContainer>
   );
 };

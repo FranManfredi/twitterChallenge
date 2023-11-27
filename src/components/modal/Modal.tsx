@@ -6,7 +6,7 @@ import { StyledModalContainer } from "./ModalContainer";
 import { StyledContainer } from "../common/Container";
 import { StyledH5, StyledP } from "../common/text";
 import OutsideAlerter from "../../hooks/OustideAlerter";
-import {createPortal} from "react-dom";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   show: boolean;
@@ -62,7 +62,8 @@ const Modal = ({
           </OutsideAlerter>
         </StyledBlurredBackground>
       )}
-    </>, document.body
+    </>,
+    document.body
   );
 };
 

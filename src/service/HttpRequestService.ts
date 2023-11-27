@@ -3,11 +3,9 @@ import axios from "axios";
 import { S3Service } from "./S3Service";
 import { axiosHandler } from "./axiosHandler";
 
-const url =
-  process.env.REACT_APP_API_URL || "http://localhost:8080/api";
+const url = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
 
 const httpRequestService = {
-
   signUp: async (data: Partial<SingUpData>) => {
     const res = await axios.post(`${url}/auth/signup`, data);
     if (res.status === 201) {
@@ -42,15 +40,17 @@ const httpRequestService = {
   },
 
   getPaginatedPosts: async (limit: number, after: string) => {
-    const res = await axiosHandler.get(`${url}/post/`, {
-      params: {
-        limit,
-        after,
-      },
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/post/`, {
+        params: {
+          limit,
+          after,
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
@@ -63,15 +63,17 @@ const httpRequestService = {
   },
 
   getRecommendedUsers: async (limit: number, skip: number) => {
-    const res = await axiosHandler.get(`${url}/user`, {
-      params: {
-        limit,
-        skip,
-      },
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/user`, {
+        params: {
+          limit,
+          skip,
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
@@ -91,42 +93,52 @@ const httpRequestService = {
     return res.data;
   },
 
-  createComment: async (postId: string, content: string, images:File[]) => {
-    const res = await axiosHandler.put(`${url}/post/${postId}`, { data:{content, images }}).catch((err) => {
-      console.log(err);
-      return err;
-    });
+  createComment: async (postId: string, content: string, images: File[]) => {
+    const res = await axiosHandler
+      .put(`${url}/post/${postId}`, { data: { content, images } })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
   createReaction: async (postId: string, reaction: string) => {
-    const res = await axiosHandler.post(`${url}/reaction/${postId}`, { type: reaction }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .post(`${url}/reaction/${postId}`, { type: reaction })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
   deleteReaction: async (reactionId: string) => {
-    const res = await axiosHandler.delete(`${url}/reaction/${reactionId}`).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .delete(`${url}/reaction/${reactionId}`)
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
   followUser: async (userId: string) => {
-    const res = await axiosHandler.post(`${url}/follow/${userId}`).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .post(`${url}/follow/${userId}`)
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
   unfollowUser: async (userId: string) => {
-    const res = await axiosHandler.delete(`${url}/follow/${userId}`).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .delete(`${url}/follow/${userId}`)
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
@@ -134,17 +146,19 @@ const httpRequestService = {
     try {
       const cancelToken = axios.CancelToken.source();
 
-      const response = await axiosHandler.get(`${url}/user/search`, {
-        params: {
-          username,
-          limit,
-          skip,
-        },
-        cancelToken: cancelToken.token,
-      }).catch((err) => {
-        console.log(err);
-        return err;
-      });
+      const response = await axiosHandler
+        .get(`${url}/user/search`, {
+          params: {
+            username,
+            limit,
+            skip,
+          },
+          cancelToken: cancelToken.token,
+        })
+        .catch((err) => {
+          console.log(err);
+          return err;
+        });
       return response.data;
     } catch (error) {
       if (!axios.isCancel(error)) console.log(error);
@@ -164,23 +178,27 @@ const httpRequestService = {
     after: string,
     id: string
   ) => {
-    const res = await axiosHandler.get(`${url}/post/by_user/${id}`, {
-      params: {
-        limit,
-        after,
-      },
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/post/by_user/${id}`, {
+        params: {
+          limit,
+          after,
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
   getPostsFromProfile: async (id: string) => {
-    const res = await axiosHandler.get(`${url}/post/by_user/${id}`).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/post/by_user/${id}`)
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
@@ -225,8 +243,9 @@ const httpRequestService = {
   },
 
   createChat: async (id: string) => {
-    const res = await axiosHandler.post(
-      `${url}/chat/create_chat/${id}`).catch((err) => {
+    const res = await axiosHandler
+      .post(`${url}/chat/create_chat/${id}`)
+      .catch((err) => {
         console.log(err);
         return err;
       });
@@ -253,56 +272,60 @@ const httpRequestService = {
     limit: number,
     after: string
   ) => {
-    const res = await axiosHandler.get(`${url}/post/comments/${id}`, {
-      params: {
-        limit,
-        after,
-      },
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/post/comments/${id}`, {
+        params: {
+          limit,
+          after,
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
 
   getCommentsByPostId: async (id: string) => {
-    const res = await axiosHandler.get(`${url}/post/comments/${id}`).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    const res = await axiosHandler
+      .get(`${url}/post/comments/${id}`)
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
     return res.data;
   },
   createChatroom: async (id: string) => {
     const res = await axiosHandler.post(`/chat/create_chatroom/${id}`);
-    if (res.status === 200){
-        return res.data;
+    if (res.status === 200) {
+      return res.data;
     }
   },
   getChatrooms: async () => {
     const res = await axiosHandler.get(`/chat/chatroom/chats`);
-    console.log(res.data)
-    if (res.status === 200){
-        return res.data;
+    console.log(res.data);
+    if (res.status === 200) {
+      return res.data;
     }
   },
   getChatData: async (id: string) => {
     const res = await axiosHandler.get(`/chat/${id}`);
-    if (res.status === 200){
-        return res.data;
+    if (res.status === 200) {
+      return res.data;
     }
   },
   sendMessage: async (id: string, message: string) => {
-    const res = await axiosHandler.post(`/chat/${id}`, {message});
-    if (res.status === 200){
-        return res.data;
+    const res = await axiosHandler.post(`/chat/${id}`, { message });
+    if (res.status === 200) {
+      return res.data;
     }
   },
   getPosibleChats: async () => {
     const res = await axiosHandler.get(`${url}/chat/posible_chats`);
-    if (res.status === 200){
-        return res.data;
+    if (res.status === 200) {
+      return res.data;
     }
-  }
+  },
 };
 
 const useHttpRequestService = () => httpRequestService;

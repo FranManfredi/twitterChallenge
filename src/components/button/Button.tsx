@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import {ButtonSize, ButtonType, StyledButton} from "./StyledButton";
+import { ButtonSize, ButtonType, StyledButton } from "./StyledButton";
 
 interface ButtonProps {
   text: string;
@@ -9,7 +9,14 @@ interface ButtonProps {
   disabled?: boolean;
   type?: "submit" | "reset" | "button";
 }
-const Button = ({ text, size, buttonType, onClick, disabled, type }: ButtonProps) => {
+const Button = ({
+  text,
+  size,
+  buttonType,
+  onClick,
+  disabled,
+  type,
+}: ButtonProps) => {
   return (
     <StyledButton
       size={size}

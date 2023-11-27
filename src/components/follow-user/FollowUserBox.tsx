@@ -7,7 +7,6 @@ import { ButtonSize, ButtonType } from "../button/StyledButton";
 import { useAppSelector } from "../../redux/hooks";
 import { StyledBoxContainer } from "./FollowUserBox-BoxContainer";
 
-
 interface FollowUserBoxProps {
   profilePicture?: string;
   name?: string;

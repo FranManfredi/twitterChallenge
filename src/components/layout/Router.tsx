@@ -33,43 +33,45 @@ export const ROUTER = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    element: <CheckSecurity/>,
-    children: [{
-      element: <WithNav />,
-      children: [
-        {
-          path: "/",
-          element: <HomePage />,
-        },
-        {
-          path: "/recommendations",
-          element: <RecommendationPage />,
-        },
-        {
-          path: "/profile/:id",
-          element: <ProfilePage />,
-        },
-        {
-          path: "/post/:id",
-          element: <PostPage />,
-        },
-        {
-          path: "/compose/tweet",
-          element: <TweetPage />,
-        },
-        {
-          path: "/post/:id",
-          element: <CommentPage />,
-        },
-        {
-          path: "/messages",
-          element: <MessagesPage/>
-        },
-        {
-          path: "/messages/:id",
-          element: <ChatPage/>
-        }
-      ],
-    },],
+    element: <CheckSecurity />,
+    children: [
+      {
+        element: <WithNav />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/recommendations",
+            element: <RecommendationPage />,
+          },
+          {
+            path: "/profile/:id",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/post/:id",
+            element: <PostPage />,
+          },
+          {
+            path: "/compose/tweet",
+            element: <TweetPage />,
+          },
+          {
+            path: "/post/:id",
+            element: <CommentPage />,
+          },
+          {
+            path: "/messages",
+            element: <MessagesPage />,
+          },
+          {
+            path: "/messages/:id",
+            element: <ChatPage />,
+          },
+        ],
+      },
+    ],
   },
 ]);

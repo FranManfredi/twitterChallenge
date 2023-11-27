@@ -8,5 +8,4 @@ export const StyledPromptContainerPlus = styled(StyledPromptContainer)`
     top: -460%;
     }
 }
-`
-
+`;

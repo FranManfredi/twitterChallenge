@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledInputLabel = styled.label`
   font-family: "Manrope", sans-serif;
   font-size: 15px;

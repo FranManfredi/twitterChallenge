@@ -18,10 +18,12 @@ export const PostModal = ({ onClose, show, children }: PostModalProps) => {
   return (
     <>
       {show && (
-        <StyledBlurredBackground onClick={onClose}> 
+        <StyledBlurredBackground onClick={onClose}>
           <StyledTweetModalContainer>
             <ModalCloseButton onClick={onClose} />
-            <div onClick={handleContentClick} style={{width:"100%"}}>{children}</div>
+            <div onClick={handleContentClick} style={{ width: "100%" }}>
+              {children}
+            </div>
           </StyledTweetModalContainer>
         </StyledBlurredBackground>
       )}

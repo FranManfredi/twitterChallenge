@@ -18,7 +18,7 @@ interface TweetProps {
   post: Post;
 }
 const Tweet = ({ post }: TweetProps) => {
-  const [actualPost, setActualPost] = useState<Post>(post );
+  const [actualPost, setActualPost] = useState<Post>(post);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
@@ -43,9 +43,11 @@ const Tweet = ({ post }: TweetProps) => {
   };
 
   const hasReactedByType = (type: string): boolean => {
-    return actualPost.reactions?.some(
-      (r) => r.type === type && r.userId === user.id
-    ) ?? false;
+    return (
+      actualPost.reactions?.some(
+        (r) => r.type === type && r.userId === user.id
+      ) ?? false
+    );
   };
 
   return (

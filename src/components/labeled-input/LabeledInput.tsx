@@ -20,7 +20,7 @@ const LabeledInput = ({
   error,
   onChange,
   type = "text",
-  name
+  name,
 }: InputWithLabelProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [focus, setFocus] = useState(false);

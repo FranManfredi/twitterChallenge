@@ -33,7 +33,8 @@ const TweetBox: React.FC<TweetBoxProps> = (props) => {
   const [images, setImages] = useState<File[]>([]);
   const [imagesPreview, setImagesPreview] = useState<string[]>([]);
 
-  const { user, length, query }: {user: User, length: number, query: string } = useSelector((state: UserState) => state);
+  const { user, length, query }: { user: User; length: number; query: string } =
+    useSelector((state: UserState) => state);
   const httpService = useHttpRequestService(); // Adjust to the actual type
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -53,8 +54,8 @@ const TweetBox: React.FC<TweetBoxProps> = (props) => {
         close && close();
         return;
       }
-      await httpService.createPost({content});
-      dispatch(updateFeed( await httpService.getPosts(query)));
+      await httpService.createPost({ content });
+      dispatch(updateFeed(await httpService.getPosts(query)));
       close && close();
     } catch (e) {
       console.log(e);
@@ -76,56 +77,56 @@ const TweetBox: React.FC<TweetBoxProps> = (props) => {
 
   return (
     <StyledTweetBoxContainer>
-    {mobile && (
-      <StyledContainer
-        flexDirection={"row"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      >
-        <BackArrowIcon onClick={close} />
-        <Button
-          text={"Tweet"}
-          buttonType={ButtonType.DEFAULT}
-          size={ButtonSize.SMALL}
-          onClick={handleSubmit}
-          disabled={content.length === 0}
-        />
-      </StyledContainer>
-    )}
-    <StyledContainer style={{ width: "100%" }}>
-      <TweetInput
-        onChange={handleChange}
-        maxLength={240}
-        placeholder={t("placeholder.tweet")}
-        value={content}
-        src={user.profilePicture}
-      />
-      <StyledContainer padding={"0 0 0 10%"}>
-        <ImageContainer
-          editable
-          images={imagesPreview}
-          removeFunction={handleRemoveImage}
-        />
-      </StyledContainer>
-      <StyledButtonContainer>
-        <ImageInput setImages={handleAddImage} parentId={parentId} />
-        {!mobile && (
+      {mobile && (
+        <StyledContainer
+          flexDirection={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <BackArrowIcon onClick={close} />
           <Button
             text={"Tweet"}
             buttonType={ButtonType.DEFAULT}
             size={ButtonSize.SMALL}
             onClick={handleSubmit}
-            disabled={
-              content.length <= 0 ||
-              content.length > 240 ||
-              images.length > 4 ||
-              images.length < 0
-            }
+            disabled={content.length === 0}
           />
-        )}
-      </StyledButtonContainer>
-    </StyledContainer>
-  </StyledTweetBoxContainer>
+        </StyledContainer>
+      )}
+      <StyledContainer style={{ width: "100%" }}>
+        <TweetInput
+          onChange={handleChange}
+          maxLength={240}
+          placeholder={t("placeholder.tweet")}
+          value={content}
+          src={user.profilePicture}
+        />
+        <StyledContainer padding={"0 0 0 10%"}>
+          <ImageContainer
+            editable
+            images={imagesPreview}
+            removeFunction={handleRemoveImage}
+          />
+        </StyledContainer>
+        <StyledButtonContainer>
+          <ImageInput setImages={handleAddImage} parentId={parentId} />
+          {!mobile && (
+            <Button
+              text={"Tweet"}
+              buttonType={ButtonType.DEFAULT}
+              size={ButtonSize.SMALL}
+              onClick={handleSubmit}
+              disabled={
+                content.length <= 0 ||
+                content.length > 240 ||
+                images.length > 4 ||
+                images.length < 0
+              }
+            />
+          )}
+        </StyledButtonContainer>
+      </StyledContainer>
+    </StyledTweetBoxContainer>
   );
 };
 

@@ -91,9 +91,7 @@ const ProfilePage = () => {
       .getProfile(id)
       .then((res) => {
         setProfile(res);
-        setFollowing(
-          res.isFollowingMe
-        );
+        setFollowing(res.isFollowingMe);
       })
       .catch(() => {
         service
@@ -144,11 +142,7 @@ const ProfilePage = () => {
               </StyledContainer>
             </StyledContainer>
             <StyledContainer width={"100%"} overflow="auto" id="profile_feed">
-              { profile ? (
-                <ProfileFeed />
-              ) : (
-                <StyledH5>Private account</StyledH5>
-              )}
+              {profile ? <ProfileFeed /> : <StyledH5>Private account</StyledH5>}
             </StyledContainer>
             <Modal
               show={showModal}

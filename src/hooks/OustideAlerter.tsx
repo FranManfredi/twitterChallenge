@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 function useOutsideAlerter(ref: any, onClickOutside: any) {
   useEffect(() => {
-    function handleClickOutside(event: { target: any; }) {
+    function handleClickOutside(event: { target: any }) {
       if (ref.current && !ref.current.contains(event.target)) {
         onClickOutside(); // Call the provided callback function
       }
@@ -15,7 +15,19 @@ function useOutsideAlerter(ref: any, onClickOutside: any) {
   }, [ref, onClickOutside]);
 }
 
-function OutsideAlerter(props: { onClickOutside: any; children: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Iterable<React.ReactNode> | null | undefined; }) {
+function OutsideAlerter(props: {
+  onClickOutside: any;
+  children:
+    | string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | Iterable<React.ReactNode>
+    | React.ReactPortal
+    | Iterable<React.ReactNode>
+    | null
+    | undefined;
+}) {
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, props.onClickOutside);
 

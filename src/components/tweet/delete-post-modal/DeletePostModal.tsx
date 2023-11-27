@@ -49,11 +49,13 @@ export const DeletePostModal = ({
     <>
       {show && (
         <>
-          <OutsideAlerter onClickOutside={() => {
-            if (!showModal) {
-              handleClose();
-            }
-          }}>
+          <OutsideAlerter
+            onClickOutside={() => {
+              if (!showModal) {
+                handleClose();
+              }
+            }}
+          >
             <StyledDeletePostModalContainer onClick={() => setShowModal(true)}>
               <DeleteIcon />
               <p>{t("buttons.delete")}</p>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const StyledChatInfoContainer = styled.div`
   display: flex;
   flex-direction: column;

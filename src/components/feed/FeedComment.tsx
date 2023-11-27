@@ -7,11 +7,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useHttpRequestService } from "../../service/HttpRequestService";
 
 interface CommentFeedProps {
-    postId: string;
-    posts: Post[] | Post;
+  postId: string;
+  posts: Post[] | Post;
 }
 
-const FeedComment = ({postId, posts }: CommentFeedProps) => {
+const FeedComment = ({ postId, posts }: CommentFeedProps) => {
   const http = useHttpRequestService();
 
   const postArray = Array.isArray(posts) ? posts : [posts];
@@ -20,9 +20,11 @@ const FeedComment = ({postId, posts }: CommentFeedProps) => {
   const [postsToShow, setPostsToShow] = useState<Post[]>([]);
 
   useEffect(() => {
-    setPostsToShow(postArray.filter((post, index, self) => {
-      return self.findIndex((p) => p.id === post.id) === index;
-    }));
+    setPostsToShow(
+      postArray.filter((post, index, self) => {
+        return self.findIndex((p) => p.id === post.id) === index;
+      })
+    );
     setAfter(postArray[postArray.length - 1]?.id ?? "");
   }, [postArray]);
 
@@ -50,13 +52,12 @@ const FeedComment = ({postId, posts }: CommentFeedProps) => {
       endMessage={<p>No more posts to show</p>}
       scrollableTarget="content-target"
     >
-      <StyledContainer width={'100%'} alignItems={'center'}>
+      <StyledContainer width={"100%"} alignItems={"center"}>
         {postsToShow.map((post: Post) => (
           <Tweet key={post.id} post={post} />
         ))}
       </StyledContainer>
     </InfiniteScroll>
-   
   );
 };
 

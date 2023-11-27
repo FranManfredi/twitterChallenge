@@ -12,7 +12,7 @@ interface FeedProps {
   scrollableTarget: string;
 }
 
-const Feed = ({ posts, loading , scrollableTarget}: FeedProps) => {
+const Feed = ({ posts, loading, scrollableTarget }: FeedProps) => {
   const http = useHttpRequestService();
 
   const postArray = Array.isArray(posts) ? posts : [posts];
@@ -21,9 +21,11 @@ const Feed = ({ posts, loading , scrollableTarget}: FeedProps) => {
   const [postsToShow, setPostsToShow] = useState<Post[]>([]);
 
   useEffect(() => {
-    setPostsToShow(postArray.filter((post, index, self) => {
-      return self.findIndex((p) => p.id === post.id) === index;
-    }));
+    setPostsToShow(
+      postArray.filter((post, index, self) => {
+        return self.findIndex((p) => p.id === post.id) === index;
+      })
+    );
     setAfter(postArray[postArray.length - 1]?.id ?? "");
   }, [postArray]);
 
@@ -52,7 +54,7 @@ const Feed = ({ posts, loading , scrollableTarget}: FeedProps) => {
       endMessage={<p>No more posts to show</p>}
       scrollableTarget={scrollableTarget}
     >
-      <StyledContainer width={'100%'} alignItems={'center'}>
+      <StyledContainer width={"100%"} alignItems={"center"}>
         {postsToShow.map((post: Post) => (
           <Tweet key={post.id} post={post} />
         ))}
