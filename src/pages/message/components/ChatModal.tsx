@@ -3,12 +3,11 @@ import { useHttpRequestService } from "../../../service/HttpRequestService";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../../service";
 import { useTranslation } from "react-i18next";
-import { StyledTweetModalContainer} from "../../../components/tweet-modal/TweetModalContainer";
 import { StyledContainer } from "../../../components/common/Container";
 import { StyledH5 } from "../../../components/common/text/H5";
 import UserDataBox from "../../../components/user-data-box/UserDataBox";
 import { StyledBlurredBackground } from "../../../components/common/BlurredBackground";
-import { ModalCloseButton } from "../../../components/common/ModalCloseButton";
+import { StyledChatModalContainer } from "../../../components/tweet-modal/ChatModalContainer";
 
 
 interface ChatModalProps {
@@ -38,8 +37,8 @@ export const ChatModal = ({ onClose, show }: ChatModalProps) => {
   }, [show]);
 
   const handleClick = async (id: string) => {
-    await service.createChat(id).then(() => {
-      navigate(`/messages/${id}`);
+    await service.createChat(id).then((res: any) => {
+      navigate(`/messages/${res}`);
     });
   };
 
@@ -71,11 +70,11 @@ export const ChatModal = ({ onClose, show }: ChatModalProps) => {
   return show ? (
     <>
       <StyledBlurredBackground onClick={onClose}>
-        <StyledTweetModalContainer>
+        <StyledChatModalContainer>
           <div onClick={handleContentClick} style={{ width: "100%" }}>
             {modalContent}
           </div>
-        </StyledTweetModalContainer>
+        </StyledChatModalContainer>
       </StyledBlurredBackground>
     </>
   ) : null;

@@ -17,7 +17,7 @@ const ProfileInfo = ({
 }: ProfileInfoContainerProps) => {
   const user = useAppSelector((state) => state.user.user);
   return (
-    <StyledContainer gap={"32px"} flex={2} flexDirection={"row"}>
+    <StyledContainer flex={2} flexDirection={"row"}>
       <Avatar
         src={user.profilePicture === null ? Icon : profilePicture!}
         width={"133px"}
